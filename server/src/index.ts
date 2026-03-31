@@ -4,6 +4,7 @@ import cors from 'cors';
 import { Step } from './models/Step.js';
 import { Project } from './models/Project.ts';
 import { Album } from './models/Album.ts';
+import { Landing } from './models/Landing.ts';
 
 const app = express();
 app.use(cors());
@@ -94,6 +95,30 @@ app.delete('/api/albums/:id', async (req, res) => {
   await Album.findByIdAndDelete(req.params.id);
   res.json({ success: true });
 });
+
+// --- КОНТЕНТ ЛЕНДИНГА ---
+
+app.get('/api/landing-content', async (req, res) => {
+  try {
+    const content = await Landing.findOne();
+    res.json(content || {}); 
+  } catch (error) {
+    res.status(500).json({ error: 'Ошибка сервера при получении контента' });
+  }
+});
+
+app.post('/api/landing-content', async (req, res) => {
+  try {
+    const updated = await Landing.findOneAndUpdate({}, req.body, { 
+      upsert: true, 
+      new: true 
+    });
+    res.json(updated);
+  } catch (error) {
+    res.status(400).json({ error: 'Ошибка при сохранении контента' });
+  }
+});
+
 
 const PORT = 3001;
 app.listen(PORT, () => {
