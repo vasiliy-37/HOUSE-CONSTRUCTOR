@@ -1,0 +1,22 @@
+/* 1. Сначала импорт шрифтов с параметрами */
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800;900&amp;family=Manrope:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap');
+
+/* 2. ОДНА строка для всего Tailwind v4 */
+@import "tailwindcss";
+
+/* 3. Настройка темы v4 (переменные автоматически создают классы) */
+@theme {
+  --font-headline: "Epilogue", sans-serif;
+  --font-body: "Manrope", sans-serif;
+
+  --color-brand-primary: #051125;
+  --color-brand-secondary: #8f4e00;
+}
+
+/* 4. Твои кастомные стили */
+#root {
+  padding: 0 7%; 
+  max-width: 1600px; 
+  margin: 0 auto;
+}
+
